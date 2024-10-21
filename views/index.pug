@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    title Event Planner
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    h1 Welcome to the Event Planner
+
+    // Main container for events and venues
+    .container
+      // Events List
+      .events.card
+        h2.card-header Events
+        .card-body
+          ul.list-group
+            each event in events
+              li.list-group-item #{event.title} - #{event.date.toDateString()} - #{event.location}
+
+          // Add Event Form
+          h2 Add Event
+          form(action='/add-event', method='POST')
+            .form-group
+              label(for='title') Title:
+              input(type='text', name='title', required=true, class='form-control')
+            .form-group
+              label(for='date') Date:
+              input(type='date', name='date', required=true, class='form-control')
+            .form-group
+              label(for='location') Location:
+              input(type='text', name='location', required=true, class='form-control')
+            .form-group
+              label(for='description') Description:
+              textarea(name='description', required=true, class='form-control')
+            button(type='submit', class='btn btn-primary') Add Event
+
+      // Venues List
+      .venues.card
+        h2.card-header Venues
+        .card-body
+          ul.list-group
+            each venue in venues
+              li.list-group-item #{venue.name} - #{venue.address} - Capacity: #{venue.capacity}
+
+          // Add Venue Form
+          h2 Add Venue
+          form(action='/add-venue', method='POST')
+            .form-group
+              label(for='name') Name:
+              input(type='text', name='name', required=true, class='form-control')
+            .form-group
+              label(for='address') Address:
+              input(type='text', name='address', required=true, class='form-control')
+            .form-group
+              label(for='capacity') Capacity:
+              input(type='number', name='capacity', required=true, class='form-control')
+            .form-group
+              label(for='amenities') Amenities:
+              input(type='text', name='amenities', class='form-control')
+            button(type='submit', class='btn btn-primary') Add Venue
+
+script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js")
+script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
